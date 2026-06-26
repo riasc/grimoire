@@ -18,17 +18,17 @@ Run in parallel:
 
 Based on the diff, assign exactly one label from:
 
-| Label | Prefix | Use when |
-|-------|--------|----------|
-| `feature` | `feat/` | New functionality |
-| `enhancement` | `enhance/` | Improving existing functionality |
-| `bug` | `fix/` | Fixing something broken |
-| `hotfix` | `hotfix/` | Urgent production fix |
-| `refactor` | `refactor/` | Code restructuring, no behavior change |
-| `chore` | `chore/` | Maintenance, dependencies, tooling |
-| `docs` | `docs/` | Documentation only |
-| `test` | `test/` | Adding or fixing tests |
-| `revert` | `revert/` | Reverting a previous change |
+| Label | Prefix | CHANGELOG section | Use when |
+|-------|--------|-------------------|----------|
+| `feature` | `feat/` | `### Added` | New functionality |
+| `enhancement` | `enhance/` | `### Changed` | Improving existing functionality |
+| `bug` | `fix/` | `### Fixed` | Fixing something broken |
+| `hotfix` | `hotfix/` | `### Fixed` | Urgent production fix |
+| `refactor` | `refactor/` | `### Refactored` | Code restructuring, no behavior change |
+| `chore` | `chore/` | `### Changed` | Maintenance, dependencies, tooling |
+| `docs` | `docs/` | `### Changed` | Documentation only |
+| `test` | `test/` | `### Added` | Adding or fixing tests |
+| `revert` | `revert/` | `### Removed` | Reverting a previous change |
 
 If `$ARGUMENTS` specifies a label, use that instead of auto-detecting.
 
@@ -62,17 +62,7 @@ EOF
 )"
 ```
 
-The `### <CHANGELOG section>` header under `## Summary` must match the label:
-
-| Label | CHANGELOG section |
-|-------|-------------------|
-| `feature`, `test` | `### Added` |
-| `enhancement`, `chore`, `docs` | `### Changed` |
-| `bug`, `hotfix` | `### Fixed` |
-| `refactor` | `### Refactored` |
-| `revert` | `### Removed` |
-
-This allows `merge-pr` to use the Summary section directly when updating the CHANGELOG.
+The `### <CHANGELOG section>` header under `## Summary` must match the label's CHANGELOG section from the step 2 table. This allows `merge-pr` to use the Summary section directly when updating the CHANGELOG.
 
 - PR title: short (under 70 characters), no prefix — the label carries the classification
 - Add the `--label` flag with the label from step 2. If the label doesn't exist yet, create it first with `gh label create <name>`
