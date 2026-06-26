@@ -1,0 +1,7 @@
+{
+  "name": "github-workflow",
+  "description": "Generic GitHub PR workflow: create, review, merge with CHANGELOG and label management.",
+  "author": {
+    "name": "riasc"
+  }
+}

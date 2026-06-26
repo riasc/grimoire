@@ -1,0 +1,18 @@
+{
+  "name": "grimoire",
+  "owner": {
+    "name": "riasc"
+  },
+  "plugins": [
+    {
+      "name": "github-workflow",
+      "source": "./plugins/github-workflow",
+      "description": "Generic GitHub PR workflow: create, review, merge with CHANGELOG and label management."
+    },
+    {
+      "name": "cpp-expert",
+      "source": "./plugins/cpp-expert",
+      "description": "C++ best practices skill (C++ Core Guidelines) for reviewing and writing modern C++."
+    }
+  ]
+}
