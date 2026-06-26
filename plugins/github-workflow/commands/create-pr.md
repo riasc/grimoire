@@ -45,7 +45,13 @@ If on `main`, create a new branch using the format `<prefix><short-description>-
 
 ### 5. Push and create PR
 
-Push the branch with `-u` flag, then create the PR:
+Push the branch with `-u` flag. Then ensure the label exists on the repo — `gh pr create --label` fails the whole command if the label is missing, so create it first (idempotent; a no-op if it already exists):
+
+```
+gh label create "<label>" 2>/dev/null || true
+```
+
+Then create the PR:
 
 ```
 gh pr create --title "<title>" --label "<label>" --body "$(cat <<'EOF'
@@ -65,7 +71,7 @@ EOF
 The `### <CHANGELOG section>` header under `## Summary` must match the label's CHANGELOG section from the step 2 table. This allows `merge-pr` to use the Summary section directly when updating the CHANGELOG.
 
 - PR title: short (under 70 characters), no prefix — the label carries the classification
-- Add the `--label` flag with the label from step 2. If the label doesn't exist yet, create it first with `gh label create <name>`
+- Add the `--label` flag with the label from step 2 (ensured to exist by the `gh label create` step above)
 - Include `Closes #<number>` in the body if an issue is being addressed
 - Test plan items should be specific and verifiable (e.g., "All tests in foo_test.cpp pass" not "Tests pass")
 
